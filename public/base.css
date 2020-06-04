@@ -1,0 +1,19 @@
+html {
+    display: flex;
+    font-size: 62.5%;
+    height: 100vh;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    width: 100%;
+}
+
+#app {
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
