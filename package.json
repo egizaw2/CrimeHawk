@@ -8,9 +8,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev-server": "webpack-dev-server --watch"
+    "build": "webpack",
+    "server": "node server/server.js",
+    "dev-server": "webpack-dev-server"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "react": "^16.13.1"
   },
   "devDependencies": {
