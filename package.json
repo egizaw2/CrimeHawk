@@ -1,5 +1,5 @@
 {
-  "name": "CrimeHawk",
+  "name": "crimehawk",
   "version": "1.0.0",
   "description": "Baltimore City Crime Data",
   "main": "index.js",
@@ -8,9 +8,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev-server": "webpack-dev-server --watch"
+    "build": "webpack",
+    "server": "node server/server.js",
+    "dev-server": "webpack-dev-server"
   },
   "dependencies": {
+    "express": "^4.17.1",
     "react": "^16.13.1"
   },
   "devDependencies": {
