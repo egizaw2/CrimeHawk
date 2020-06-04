@@ -1,5 +1,5 @@
 {
-  "name": "CrimeHawk",
+  "name": "crimehawk",
   "version": "1.0.0",
   "description": "Baltimore City Crime Data",
   "main": "index.js",
