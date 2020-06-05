@@ -73,7 +73,7 @@ class Root extends React.Component {
                   </Col>
                   <Col xs={12} sm={12} md={2}>
                     <Form.Group>
-                      <Button variant="primary" type="submit" className="mx-auto d-block">Submit</Button>
+                      <Button variant="primary" type="submit" className="mx-auto d-block">Go</Button>
                     </Form.Group>
                   </Col>
                 </Form.Row>
