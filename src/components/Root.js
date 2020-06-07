@@ -51,11 +51,20 @@ class Root extends React.Component {
                     <Form.Group>
                       <Form.Control as="select">
                         <option value="0">Search By Crime Type</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option>Aggrivated Assault</option>
+								        <option>Arson</option>
+								        <option>Auto Theft</option>
+								        <option>Burglary</option>
+                        <option>Common Assault</option>
+                        <option>Homicide</option>
+                        <option>Larceny</option>
+                        <option>Larceny from Auto</option>
+                        <option>Rape</option>
+                        <option>Robbery-Carjacking</option>
+                        <option>Robbery-Commercial</option>
+                        <option>Robbery-Residence</option>
+                        <option>Robbery-Street</option>
+                        <option>Shooting</option>
                       </Form.Control>
                     </Form.Group>
                   </Col>
@@ -63,11 +72,13 @@ class Root extends React.Component {
                     <Form.Group>
                       <Form.Control as="select">
                         <option value="0">Search By Crime Year</option>
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option>2014</option>
+                        <option>2015</option>
+                        <option>2016</option>
+                        <option>2017</option>
+                        <option>2018</option>
+                        <option>2019</option>
+                        <option>2020</option>
                       </Form.Control>
                     </Form.Group>
                   </Col>
