@@ -6,26 +6,38 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card'
-import Table from 'react-bootstrap/Table'
-import Highcharts from 'highcharts/highstock'
-import HighchartsReact from 'highcharts-react-official'
-
-// This is for the highcharts example
-// https://www.highcharts.com/blog/tutorials/highcharts-wrapper-for-react-101/
-// All Charts and Map should be their own component
-const options = {
-  title: {
-    text: 'My stock chart'
-  },
-  series: [
-    {
-      data: [1, 2, 1, 4, 3, 6, 7, 3, 8, 6, 9]
-    }
-  ]
-}
+import Burglary from './Burglary'
+import Homicide from './Homicide'
+import Theft from './Theft'
+// import Card from 'react-bootstrap/Card'
+// import Table from 'react-bootstrap/Table'
+// import Highcharts from 'highcharts/highstock'
+// import HighchartsReact from 'highcharts-react-official'
 
 class Root extends React.Component {
+  state = {
+    crimeType: '', // Can be Burglary, Homicide, or Theft
+    year: '' // Can be 2014-2020
+  }
+
+  handleCrimeChange = (e) => {
+    const type = e.target.value
+    this.setState(() => (
+      {
+        crimeType: type
+      }
+    ))
+  }
+
+  handleYearChange = (e) => {
+    const year = e.target.value
+    this.setState(() => (
+      {
+        year
+      }
+    ))
+  }
+
   render () {
     return (
       <div>
@@ -49,28 +61,23 @@ class Root extends React.Component {
                 <Form.Row>
                   <Col xs={12} sm={12} md={5}>
                     <Form.Group>
-                      <Form.Control as="select">
+                      <Form.Control
+                        as="select"
+                        onChange={this.handleCrimeChange}
+                      >
                         <option value="0">Search By Crime Type</option>
-                        <option>Aggrivated Assault</option>
-                        <option>Arson</option>
-                        <option>Auto Theft</option>
                         <option>Burglary</option>
-                        <option>Common Assault</option>
                         <option>Homicide</option>
-                        <option>Larceny</option>
-                        <option>Larceny from Auto</option>
-                        <option>Rape</option>
-                        <option>Robbery-Carjacking</option>
-                        <option>Robbery-Commercial</option>
-                        <option>Robbery-Residence</option>
-                        <option>Robbery-Street</option>
-                        <option>Shooting</option>
+                        <option>Theft</option>
                       </Form.Control>
                     </Form.Group>
                   </Col>
                   <Col xs={12} sm={12} md={5}>
                     <Form.Group>
-                      <Form.Control as="select">
+                      <Form.Control
+                        as="select"
+                        onChange={this.handleYearChange}
+                      >
                         <option value="0">Search By Crime Year</option>
                         <option>2014</option>
                         <option>2015</option>
@@ -91,53 +98,10 @@ class Root extends React.Component {
               </Form>
             </Col>
           </Row>
-          <Row className="mt-3">
-            <Col>
-              <Card>
-                <Card.Header className="bg-dark text-white">Chart</Card.Header>
-                <Card.Body>
-                  <Card.Title>Title</Card.Title>
-                  <Card.Text>Text</Card.Text>
-                  <HighchartsReact highcharts={Highcharts} constructorType={'stockChart'} options={options}></HighchartsReact>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-          <Row className="mt-3">
-            <Col>
-              <Card>
-                <Card.Header className="bg-dark text-white">Data</Card.Header>
-                <Card.Body>
-                  <Card.Title>Title</Card.Title>
-                  <Card.Text>Text</Card.Text>
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>#</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                      </tr>
-                    </tbody>
-                  </Table>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+          {this.state.crimeType === 'Burglary' && this.state.year && <Burglary year={this.state.year} />}
+          {this.state.crimeType === 'Homicide' && this.state.year && <Homicide year={this.state.year} />}
+          {this.state.crimeType === 'Theft' && this.state.year && <Theft year={this.state.year} />}
+          {(!this.state.crimeType || !this.state.year) && <h1>Please select a Crime Type and Year</h1>}
         </Container>
       </div>
     )
