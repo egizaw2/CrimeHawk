@@ -52,9 +52,9 @@ class Root extends React.Component {
                       <Form.Control as="select">
                         <option value="0">Search By Crime Type</option>
                         <option>Aggrivated Assault</option>
-								        <option>Arson</option>
-								        <option>Auto Theft</option>
-								        <option>Burglary</option>
+                        <option>Arson</option>
+                        <option>Auto Theft</option>
+                        <option>Burglary</option>
                         <option>Common Assault</option>
                         <option>Homicide</option>
                         <option>Larceny</option>
