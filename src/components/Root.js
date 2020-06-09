@@ -48,9 +48,9 @@ class Root extends React.Component {
           <Row>
             <Col>
               <Jumbotron className="mt-2 bg-dark text-white">
-                <h1 className="display-4">CrimeHawk</h1>
+                <h1 className="display-2 font-weight-bold">CrimeHawk</h1>
                 <p className="lead">
-                  Crime information for the city of baltimore. Select crime type and year to display results.
+                  Crime information for the city of Baltimore
                 </p>
               </Jumbotron>
             </Col>
@@ -91,7 +91,7 @@ class Root extends React.Component {
                   </Col>
                   <Col xs={12} sm={12} md={2}>
                     <Form.Group>
-                      <Button variant="primary" type="submit" className="mx-auto d-block">Go</Button>
+                      <Button variant="primary" type="submit" className="mx-auto d-block">Submit</Button>
                     </Form.Group>
                   </Col>
                 </Form.Row>
