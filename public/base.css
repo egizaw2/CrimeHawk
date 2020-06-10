@@ -1,6 +1,7 @@
 .jumbotron {
     background: linear-gradient(rgba(139, 0, 0, 0.6), rgba(0, 0, 0, 0.9)), url("https://vignette.wikia.nocookie.net/gtawiki/images/6/6f/Hawk-GTAV.jpg/revision/latest?cb=20191125223121");
     background-size: cover;
+    background-color: linear-gradient(rgba(139, 0, 0, 0.6), rgba(0, 0, 0, 0.9));
     color: white;
     opacity: 1.0;
 }
