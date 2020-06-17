@@ -16,6 +16,12 @@ app.get('*', (request, response) => {
   response.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'))
 })
 
+//node schedule
+var schedule = schedule.scheduleJob({ hour: 00, minute: 00 },
+  function () {
+    console.log('Data updated!')
+  })
+  
 // MongoDB Setup
 const url = 'mongodb+srv://CrimeHawk:BpgWODrXCT8u0pZS@crimehawk-bdw7f.mongodb.net/CrimeHawk?retryWrites=true&w=majority'
 const dbName = 'CrimeHawk'
@@ -37,3 +43,4 @@ MongoClient.connect(url, (error, client) => {
 app.listen(port, () => {
   console.log('Server is up!')
 })
+
