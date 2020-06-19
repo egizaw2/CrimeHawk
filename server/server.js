@@ -51,7 +51,7 @@ getDataAtMidnight.scheduleJob(
   { hour: 0, minute: 0 },
   async () => {
     // Get crime data
-    const data = getCrimeData()
+    const data = await getCrimeData()
 
     // Overwrite all data if there
     if (data) {
