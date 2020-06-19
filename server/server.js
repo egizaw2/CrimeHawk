@@ -14,10 +14,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.set('view engine', 'ejs')
 
-app.get('*', (request, response) => {
-  response.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'))
-})
-
 // MongoDB Setup
 const url = 'mongodb+srv://CrimeHawk:BpgWODrXCT8u0pZS@crimehawk-bdw7f.mongodb.net/CrimeHawk?retryWrites=true&w=majority'
 const dbName = 'CrimeHawk'
@@ -25,17 +21,31 @@ const MongoClient = mongodb.MongoClient
 const collectionName = 'CrimeData'
 let db
 
-MongoClient.connect(url, (error, client) => {
-  if (error) throw error
-  console.log('Connected successfully to MongoDB Atlas server')
+MongoClient.connect(
+  url,
+  { useUnifiedTopology: true },
+  (error, client) => {
+    if (error) throw error
+    console.log('Connected successfully to MongoDB Atlas server')
 
-  db = client.db(dbName)
+    db = client.db(dbName)
 
-  db.createCollection(collectionName)
-})
+    db.createCollection(collectionName)
+  }
+)
 
+// HTTP request handling
 app.listen(port, () => {
   console.log('Server is up!')
+})
+
+app.get('/', (request, response) => {
+  response.sendFile(path.resolve(__dirname, '..', 'public', 'index.html'))
+})
+
+app.get('/crime_data', async (request, response) => {
+  const data = await db.collection(collectionName).find().toArray()
+  response.status(200).send(data)
 })
 
 // API request for crime data

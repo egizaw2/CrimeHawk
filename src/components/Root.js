@@ -9,15 +9,24 @@ import Button from 'react-bootstrap/Button'
 import Burglary from './Burglary'
 import Homicide from './Homicide'
 import Theft from './Theft'
+import PropTypes from 'prop-types'
 // import Card from 'react-bootstrap/Card'
 // import Table from 'react-bootstrap/Table'
 // import Highcharts from 'highcharts/highstock'
 // import HighchartsReact from 'highcharts-react-official'
 
 class Root extends React.Component {
+  static propTypes = {
+    crimeData: PropTypes.array.isRequired
+  }
+
   state = {
     crimeType: '', // Can be Burglary, Homicide, or Theft
     year: '' // Can be 2014-2020
+  }
+
+  componentDidMount () {
+    console.log(this.props.crimeData.length)
   }
 
   handleCrimeChange = (e) => {
