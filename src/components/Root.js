@@ -107,9 +107,9 @@ class Root extends React.Component {
               </Form>
             </Col>
           </Row>
-          {this.state.crimeType === 'Burglary' && this.state.year && <Burglary year={this.state.year} />}
-          {this.state.crimeType === 'Homicide' && this.state.year && <Homicide year={this.state.year} />}
-          {this.state.crimeType === 'Theft' && this.state.year && <Theft year={this.state.year} />}
+          {this.state.crimeType === 'Burglary' && this.state.year && <Burglary crimeData={this.props.crimeData} year={this.state.year} />}
+          {this.state.crimeType === 'Homicide' && this.state.year && <Homicide crimeData={this.props.crimeData} year={this.state.year} />}
+          {this.state.crimeType === 'Theft' && this.state.year && <Theft crimeData={this.props.crimeData} year={this.state.year} />}
           {(!this.state.crimeType || !this.state.year) && <h1>Please select a Crime Type and Year</h1>}
         </Container>
       </div>
