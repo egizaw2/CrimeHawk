@@ -9,15 +9,24 @@ import Button from 'react-bootstrap/Button'
 import Burglary from './Burglary'
 import Homicide from './Homicide'
 import Theft from './Theft'
+import PropTypes from 'prop-types'
 // import Card from 'react-bootstrap/Card'
 // import Table from 'react-bootstrap/Table'
 // import Highcharts from 'highcharts/highstock'
 // import HighchartsReact from 'highcharts-react-official'
 
 class Root extends React.Component {
+  static propTypes = {
+    crimeData: PropTypes.array.isRequired
+  }
+
   state = {
     crimeType: '', // Can be Burglary, Homicide, or Theft
     year: '' // Can be 2014-2020
+  }
+
+  componentDidMount () {
+    console.log(this.props.crimeData.length)
   }
 
   handleCrimeChange = (e) => {
@@ -98,9 +107,9 @@ class Root extends React.Component {
               </Form>
             </Col>
           </Row>
-          {this.state.crimeType === 'Burglary' && this.state.year && <Burglary year={this.state.year} />}
-          {this.state.crimeType === 'Homicide' && this.state.year && <Homicide year={this.state.year} />}
-          {this.state.crimeType === 'Theft' && this.state.year && <Theft year={this.state.year} />}
+          {this.state.crimeType === 'Burglary' && this.state.year && <Burglary crimeData={this.props.crimeData} year={this.state.year} />}
+          {this.state.crimeType === 'Homicide' && this.state.year && <Homicide crimeData={this.props.crimeData} year={this.state.year} />}
+          {this.state.crimeType === 'Theft' && this.state.year && <Theft crimeData={this.props.crimeData} year={this.state.year} />}
           {(!this.state.crimeType || !this.state.year) && <h1>Please select a Crime Type and Year</h1>}
         </Container>
       </div>
