@@ -2,83 +2,204 @@ import React from 'react'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import PropTypes from 'prop-types'
+import moment from 'moment'
+import Highcharts from 'highcharts'
+import HighchartsReact from 'highcharts-react-official'
 
 class Homicide extends React.Component {
   static propTypes = {
-    year: PropTypes.string
+    year: PropTypes.string,
+    crimeData: PropTypes.array
   }
 
+  tableStyle = {
+    boarder: '1px solid lightgray',
+    width: '100%'
+  }
+
+  threadStyle = {
+
+  }
+
+  tableStyle = {
+    height: '10rem',
+    overflowY: 'scroll',
+    width: '100%'
+  }
+
+  getHomicides = () => {
+    return this.props.crimeData.filter(crime => {
+      const crimeYear = moment(crime.crimedate).year().toString()
+      return crime.description === 'HOMICIDE' && crimeYear === this.props.year
+    })
+  }
+
+  createData = (property) => {
+    const homicides = this.getHomicides()
+    const dict = {}
+    if (property === 'district') {
+      homicides.forEach(homicide => {
+        if (dict[homicide[property]]) {
+          dict[homicide[property]] += 1
+        } else {
+          dict[homicide[property]] = 1
+        }
+      })
+    } else if (property === 'crimedate') {
+      let month
+      for (let i = 0; i < 12; i++) {
+        dict[i] = 0
+      }
+      homicides.forEach(homicide => {
+        month = moment(homicide.crimedata).month()
+        dict[month] += 1
+      })
+    }
+
+    const data = []
+    for (const key in dict) {
+      data.push(
+        {
+          name: key,
+          y: dict[key]
+        }
+      )
+    }
+    return data
+  }
+
+  getDistrictOptions = () => {
+    const data = this.createData('district')
+    return {
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: 'Homicides per District'
+      },
+      series: [
+        {
+          name: 'districts',
+          data: data
+        }
+      ]
+    }
+  }
+
+  getMonthlyOptions = () => {
+    const data = this.createData('crimedate')
+    return {
+      chart: {
+        type: 'line'
+      },
+      title: {
+        text: 'Homicides per Month'
+      },
+      xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      },
+      yAxis: {
+        title: {
+          text: '# of Homicides'
+        }
+      },
+      plotOptions: {
+        line: {
+          dataLabels: {
+            enabled: true
+          }
+        }
+      },
+      series: [{
+        name: 'Homicides',
+        data: data.map(month => month.y)
+      }]
+    }
+  }
+  // Construct
+
   render () {
+    const districtOptions = this.getDistrictOptions()
+    const monthlyOptions = this.getMonthlyOptions()
     return (
-      <Row>
-        <Col>
-          <h1>Homicide Page</h1>
-          <h2>The year is {this.props.year}</h2>
-        </Col>
-      </Row>
+      <div>
+        <Row>
+          <Col>
+            <h1>Homicide Page</h1>
+            <h2>The year is {this.props.year}</h2>
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={districtOptions}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={monthlyOptions}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <h2>Details of Each Homicide</h2>
+            <table style={this.tableStyle}>
+              <thead style={this.theadStyle}>
+                <tr>
+                  <th>
+                    Date
+                  </th>
+                  <th>
+                    code
+                  </th>
+                  <th>
+                    Description
+                  </th>
+                  <th>
+                    location
+                  </th>
+                  <th>
+                    District
+                  </th>
+                </tr>
+              </thead>
+              <tbody style={this.tbodyStyle}>
+                {this.getHomicides()
+                  .sort((a, b) => {
+                    if (moment(a.crimedate).isBefore(b.crimedate)) return -1
+                    if (moment(a.crimedate).isBefore(b.crimedate)) return 1
+                    return 0
+                  })
+                  .map(homicide => {
+                    return (
+                      <tr key={homicide._id}>
+                        <td>
+                          {moment(homicide.crimedate).format('MM/DD/YYYY')}
+                        </td>
+                        <td>
+                          {homicide.crimecode}
+                        </td>
+                        <td>
+                          {homicide.description}
+                        </td>
+                        <td>
+                          {homicide.location}
+                        </td>
+                        <td>
+                          {homicide.district}
+                        </td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
+          </Col>
+        </Row>
+      </div>
     )
   }
 }
 
 export default Homicide
-// // This is for the highcharts example
-// // https://www.highcharts.com/blog/tutorials/highcharts-wrapper-for-react-101/
-// // All Charts and Map should be their own component
-// const options = {
-//   title: {
-//     text: 'My stock chart'
-//   },
-//   series: [
-//     {
-//       data: [1, 2, 1, 4, 3, 6, 7, 3, 8, 6, 9]
-//     }
-//   ]
-// }
-
-// <Row className="mt-3">
-//             <Col>
-//               <Card>
-//                 <Card.Header className="bg-dark text-white">Chart</Card.Header>
-//                 <Card.Body>
-//                   <Card.Title>Title</Card.Title>
-//                   <Card.Text>Text</Card.Text>
-//                   <HighchartsReact highcharts={Highcharts} constructorType={'stockChart'} options={options}></HighchartsReact>
-//                 </Card.Body>
-//               </Card>
-//             </Col>
-//           </Row>
-//           <Row className="mt-3">
-//             <Col>
-//               <Card>
-//                 <Card.Header className="bg-dark text-white">Data</Card.Header>
-//                 <Card.Body>
-//                   <Card.Title>Title</Card.Title>
-//                   <Card.Text>Text</Card.Text>
-//                   <Table striped bordered hover>
-//                     <thead>
-//                       <tr>
-//                         <th>#</th>
-//                         <th>First Name</th>
-//                         <th>Last Name</th>
-//                         <th>Username</th>
-//                       </tr>
-//                     </thead>
-//                     <tbody>
-//                       <tr>
-//                         <td>1</td>
-//                         <td>Mark</td>
-//                         <td>Otto</td>
-//                         <td>@mdo</td>
-//                       </tr>
-//                       <tr>
-//                         <td>2</td>
-//                         <td>Jacob</td>
-//                         <td>Thornton</td>
-//                         <td>@fat</td>
-//                       </tr>
-//                     </tbody>
-//                   </Table>
-//                 </Card.Body>
-//               </Card>
-//             </Col>
-//           </Row>
