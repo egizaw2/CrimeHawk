@@ -16,19 +16,18 @@ import PropTypes from 'prop-types'
 // import HighchartsReact from 'highcharts-react-official'
 
 class Root extends React.Component {
+  // Completed 6/28/2020 by Andrew Landis
   static propTypes = {
     crimeData: PropTypes.array.isRequired
   }
 
+  // Completed 6/28/2020 by Andrew Landis
   state = {
     crimeType: '', // Can be Burglary, Homicide, or Theft
     year: '' // Can be 2014-2020
   }
 
-  componentDidMount () {
-    console.log(this.props.crimeData.length)
-  }
-
+  // Completed 6/28/2020 by Andrew Landis
   handleCrimeChange = (e) => {
     const type = e.target.value
     this.setState(() => (
@@ -38,6 +37,7 @@ class Root extends React.Component {
     ))
   }
 
+  // Completed 6/28/2020 by Andrew Landis
   handleYearChange = (e) => {
     const year = e.target.value
     this.setState(() => (
@@ -47,6 +47,7 @@ class Root extends React.Component {
     ))
   }
 
+  // Completed 6/28/2020 by Andrew Landis and Eske Gizaw
   render () {
     return (
       <div>
