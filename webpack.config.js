@@ -1,5 +1,6 @@
 const path = require('path')
 
+// Completed on 6/28/2020 by Andrew Landis
 module.exports = {
   entry: './src/index.js',
   mode: 'development',
@@ -12,11 +13,11 @@ module.exports = {
       {
         test: /\.js$/,
         loader: ['babel-loader', 'eslint-loader'],
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
