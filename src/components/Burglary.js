@@ -82,7 +82,7 @@ class Burglary extends React.Component {
       },
       series: [
         {
-          name: 'districts',
+          name: 'Burglaries',
           data: data
         }
       ]
