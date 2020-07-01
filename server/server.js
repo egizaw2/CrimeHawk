@@ -56,7 +56,7 @@ app.get('/crime_data', async (request, response) => {
 const getCrimeData = async () => {
   console.log('Getting crime data')
   const response = await fetch(
-    'https://data.baltimorecity.gov/resource/nhwe-7c7x.json?$limit=1000000',
+    'https://data.baltimorecity.gov/resource/nhwe-7c7x.json?$limit=10000',
     {
       method: 'get',
       headers: {
