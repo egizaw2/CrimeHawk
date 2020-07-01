@@ -54,7 +54,15 @@ app.get('/crime_data', async (request, response) => {
 // API request for crime data
 // Completed 6/28/2020 by Andrew Landis
 const getCrimeData = async () => {
-  const response = await fetch('https://data.baltimorecity.gov/resource/nhwe-7c7x.json')
+  const response = await fetch(
+    'https://data.baltimorecity.gov/resource/nhwe-7c7x.json?$limit=1000000',
+    {
+      method: 'get',
+      headers: {
+        'X-App-Token': '24EVQPJRNXkVYgAhaYeOX1kY0'
+      }
+    }
+  )
   const data = await response.json()
   return data
 }
