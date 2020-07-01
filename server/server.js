@@ -6,6 +6,7 @@ const schedule = require('node-schedule')
 const fetch = require('node-fetch')
 
 // Express Setup
+// Completed 6/28/2020 by Andrew Landis
 const app = express()
 const port = process.env.PORT || 8000
 const publicPath = path.join(__dirname, '..', 'public')
@@ -15,6 +16,7 @@ app.use(bodyParser.json())
 app.set('view engine', 'ejs')
 
 // MongoDB Setup
+// Completed 6/28/2020 by Andrew Landis
 const url = 'mongodb+srv://CrimeHawk:BpgWODrXCT8u0pZS@crimehawk-bdw7f.mongodb.net/CrimeHawk?retryWrites=true&w=majority'
 const dbName = 'CrimeHawk'
 const MongoClient = mongodb.MongoClient
@@ -35,6 +37,7 @@ MongoClient.connect(
 )
 
 // HTTP request handling
+// Completed 6/28/2020 by Eske Gizaw
 app.listen(port, () => {
   console.log('Server is up!')
 })
@@ -49,13 +52,24 @@ app.get('/crime_data', async (request, response) => {
 })
 
 // API request for crime data
+// Completed 6/28/2020 by Andrew Landis
 const getCrimeData = async () => {
-  const response = await fetch('https://data.baltimorecity.gov/resource/nhwe-7c7x.json')
+  console.log('Getting crime data')
+  const response = await fetch(
+    'https://data.baltimorecity.gov/resource/nhwe-7c7x.json?$limit=1000000',
+    {
+      method: 'get',
+      headers: {
+        'X-App-Token': '24EVQPJRNXkVYgAhaYeOX1kY0'
+      }
+    }
+  )
   const data = await response.json()
   return data
 }
 
 // Node schedule
+// Completed 6/28/2020 by Eske Gizaw
 const getDataAtMidnight = schedule
 getDataAtMidnight.scheduleJob(
   { hour: 0, minute: 0 },
