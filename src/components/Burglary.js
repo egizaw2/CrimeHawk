@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import moment from 'moment'
+import Table from 'react-bootstrap/Table'
 
 class Burglary extends React.Component {
   static propTypes = {
@@ -146,57 +147,60 @@ class Burglary extends React.Component {
         <Row>
           <Col>
             <h2>Details of Each Burglary</h2>
-            <table style={this.tableStyle}>
-              <thead style={this.theadStyle}>
-                <tr>
-                  <th>
-                    Date
-                  </th>
-                  <th>
+            <Table responsive="lg">
+              <table className="table table-striped table-bordered table-lg" cellSpacing="0"
+                width="100%">
+                <thead style={this.theadStyle}>
+                  <tr>
+                    <th>
+                      Date
+                    </th>
+                    <th>
                     Code
-                  </th>
-                  <th>
+                    </th>
+                    <th>
                     Description
-                  </th>
-                  <th>
+                    </th>
+                    <th>
                     Location
-                  </th>
-                  <th>
+                    </th>
+                    <th>
                     District
-                  </th>
-                </tr>
-              </thead>
-              <tbody style={this.tbodyStyle}>
-                {this.getBurglaries()
-                  .sort((a, b) => {
-                    if (moment(a.crimedate).isBefore(b.crimedate)) return -1
-                    if (moment(a.crimedate).isBefore(b.crimedate)) return 1
-                    return 0
-                  })
-                  .map(burglary => {
-                    return (
-                      <tr key={burglary._id}>
-                        <td>
-                          {moment(burglary.crimedate).format('MM/DD/YYYY')}
-                        </td>
-                        <td>
-                          {burglary.crimecode}
-                        </td>
-                        <td>
-                          {burglary.description}
-                        </td>
-                        <td>
-                          {burglary.location}
-                        </td>
-                        <td>
-                          {burglary.district}
-                        </td>
-                      </tr>
-                    )
-                  })
-                }
-              </tbody>
-            </table>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style={this.tbodyStyle}>
+                  {this.getBurglaries()
+                    .sort((a, b) => {
+                      if (moment(a.crimedate).isBefore(b.crimedate)) return -1
+                      if (moment(a.crimedate).isBefore(b.crimedate)) return 1
+                      return 0
+                    })
+                    .map(burglary => {
+                      return (
+                        <tr key={burglary._id}>
+                          <td>
+                            {moment(burglary.crimedate).format('MM/DD/YYYY')}
+                          </td>
+                          <td>
+                            {burglary.crimecode}
+                          </td>
+                          <td>
+                            {burglary.description}
+                          </td>
+                          <td>
+                            {burglary.location}
+                          </td>
+                          <td>
+                            {burglary.district}
+                          </td>
+                        </tr>
+                      )
+                    })
+                  }
+                </tbody>
+              </table>
+            </Table>
           </Col>
         </Row>
       </div>
