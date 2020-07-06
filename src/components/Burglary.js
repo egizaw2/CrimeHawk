@@ -7,6 +7,7 @@ import HighchartsReact from 'highcharts-react-official'
 import moment from 'moment'
 import Table from 'react-bootstrap/Table'
 
+// Completed on 7/3/2020 by Andrew Landis
 class Burglary extends React.Component {
   static propTypes = {
     crimeData: PropTypes.array,
