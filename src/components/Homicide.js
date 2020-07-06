@@ -9,20 +9,20 @@ import Table from 'react-bootstrap/Table'
 
 class Homicide extends React.Component {
   static propTypes = {
-    year: PropTypes.string,
-    crimeData: PropTypes.array
+    crimeData: PropTypes.array,
+    year: PropTypes.string
   }
 
   tableStyle = {
-    boarder: '1px solid lightgray',
+    border: '1px solid lightgray',
     width: '100%'
   }
 
-  threadStyle = {
+  theadStyle = {
 
   }
 
-  tableStyle = {
+  tbodyStyle = {
     height: '10rem',
     overflowY: 'scroll',
     width: '100%'
@@ -52,7 +52,7 @@ class Homicide extends React.Component {
         dict[i] = 0
       }
       homicides.forEach(homicide => {
-        month = moment(homicide.crimedata).month()
+        month = moment(homicide.crimedate).month()
         dict[month] += 1
       })
     }
