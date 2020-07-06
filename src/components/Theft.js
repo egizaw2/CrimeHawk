@@ -147,59 +147,56 @@ class Theft extends React.Component {
         <Row>
           <Col>
             <h2>Details of Each Larceny</h2>
-            <Table responsive="lg">
-              <table className="table table-striped table-bordered table-lg" cellSpacing="0"
-                width="100%">
-                <thead style={this.theadStyle}>
-                  <tr>
-                    <th>
+            <Table responsive striped bordered="lg">
+              <thead style={this.theadStyle}>
+                <tr>
+                  <th>
                     Date
-                    </th>
-                    <th>
+                  </th>
+                  <th>
                     Code
-                    </th>
-                    <th>
+                  </th>
+                  <th>
                     Description
-                    </th>
-                    <th>
+                  </th>
+                  <th>
                     Location
-                    </th>
-                    <th>
+                  </th>
+                  <th>
                     District
-                    </th>
-                  </tr>
-                </thead>
-                <tbody style={this.tbodyStyle}>
-                  {this.getLarcenies()
-                    .sort((a, b) => {
-                      if (moment(a.crimedate).isBefore(b.crimedate)) return -1
-                      if (moment(a.crimedate).isBefore(b.crimedate)) return 1
-                      return 0
-                    })
-                    .map(larceny => {
-                      return (
-                        <tr key={larceny._id}>
-                          <td>
-                            {moment(larceny.crimedate).format('MM/DD/YYYY')}
-                          </td>
-                          <td>
-                            {larceny.crimecode}
-                          </td>
-                          <td>
-                            {larceny.description}
-                          </td>
-                          <td>
-                            {larceny.location}
-                          </td>
-                          <td>
-                            {larceny.district}
-                          </td>
-                        </tr>
-                      )
-                    })
-                  }
-                </tbody>
-              </table>
+                  </th>
+                </tr>
+              </thead>
+              <tbody style={this.tbodyStyle}>
+                {this.getLarcenies()
+                  .sort((a, b) => {
+                    if (moment(a.crimedate).isBefore(b.crimedate)) return -1
+                    if (moment(a.crimedate).isBefore(b.crimedate)) return 1
+                    return 0
+                  })
+                  .map(larceny => {
+                    return (
+                      <tr key={larceny._id}>
+                        <td>
+                          {moment(larceny.crimedate).format('MM/DD/YYYY')}
+                        </td>
+                        <td>
+                          {larceny.crimecode}
+                        </td>
+                        <td>
+                          {larceny.description}
+                        </td>
+                        <td>
+                          {larceny.location}
+                        </td>
+                        <td>
+                          {larceny.district}
+                        </td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
             </Table>
           </Col>
         </Row>

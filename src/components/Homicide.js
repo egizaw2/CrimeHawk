@@ -145,59 +145,56 @@ class Homicide extends React.Component {
         <Row>
           <Col>
             <h2>Details of Each Homicide</h2>
-            <Table responsive="lg">
-              <table className="table table-striped table-bordered table-lg" cellSpacing="0"
-                width="100%">
-                <thead style={this.theadStyle}>
-                  <tr>
-                    <th>
+            <Table responsive striped bordered ="lg">
+              <thead style={this.theadStyle}>
+                <tr>
+                  <th>
                     Date
-                    </th>
-                    <th>
+                  </th>
+                  <th>
                     code
-                    </th>
-                    <th>
+                  </th>
+                  <th>
                     Description
-                    </th>
-                    <th>
-                    location
-                    </th>
-                    <th>
+                  </th>
+                  <th>
+                    Location
+                  </th>
+                  <th>
                     District
-                    </th>
-                  </tr>
-                </thead>
-                <tbody style={this.tbodyStyle}>
-                  {this.getHomicides()
-                    .sort((a, b) => {
-                      if (moment(a.crimedate).isBefore(b.crimedate)) return -1
-                      if (moment(a.crimedate).isBefore(b.crimedate)) return 1
-                      return 0
-                    })
-                    .map(homicide => {
-                      return (
-                        <tr key={homicide._id}>
-                          <td>
-                            {moment(homicide.crimedate).format('MM/DD/YYYY')}
-                          </td>
-                          <td>
-                            {homicide.crimecode}
-                          </td>
-                          <td>
-                            {homicide.description}
-                          </td>
-                          <td>
-                            {homicide.location}
-                          </td>
-                          <td>
-                            {homicide.district}
-                          </td>
-                        </tr>
-                      )
-                    })
-                  }
-                </tbody>
-              </table>
+                  </th>
+                </tr>
+              </thead>
+              <tbody style={this.tbodyStyle}>
+                {this.getHomicides()
+                  .sort((a, b) => {
+                    if (moment(a.crimedate).isBefore(b.crimedate)) return -1
+                    if (moment(a.crimedate).isBefore(b.crimedate)) return 1
+                    return 0
+                  })
+                  .map(homicide => {
+                    return (
+                      <tr key={homicide._id}>
+                        <td>
+                          {moment(homicide.crimedate).format('MM/DD/YYYY')}
+                        </td>
+                        <td>
+                          {homicide.crimecode}
+                        </td>
+                        <td>
+                          {homicide.description}
+                        </td>
+                        <td>
+                          {homicide.location}
+                        </td>
+                        <td>
+                          {homicide.district}
+                        </td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
             </Table>
           </Col>
         </Row>
