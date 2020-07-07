@@ -53,6 +53,7 @@ app.get('/crime_data', async (request, response) => {
 
 // API request for crime data
 // Completed 6/28/2020 by Andrew Landis
+// Updated on 7/3/2020 by Andrew Landis
 const getCrimeData = async () => {
   console.log('Getting crime data')
   const response = await fetch(
