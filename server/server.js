@@ -53,10 +53,11 @@ app.get('/crime_data', async (request, response) => {
 
 // API request for crime data
 // Completed 6/28/2020 by Andrew Landis
+// Updated on 7/3/2020 by Andrew Landis
 const getCrimeData = async () => {
   console.log('Getting crime data')
   const response = await fetch(
-    'https://data.baltimorecity.gov/resource/nhwe-7c7x.json?$limit=1000000',
+    'https://data.baltimorecity.gov/resource/nhwe-7c7x.json?$limit=10000',
     {
       method: 'get',
       headers: {

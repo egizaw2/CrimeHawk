@@ -5,23 +5,24 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
+import Table from 'react-bootstrap/Table'
 
 class Homicide extends React.Component {
   static propTypes = {
-    year: PropTypes.string,
-    crimeData: PropTypes.array
+    crimeData: PropTypes.array,
+    year: PropTypes.string
   }
 
   tableStyle = {
-    boarder: '1px solid lightgray',
+    border: '1px solid lightgray',
     width: '100%'
   }
 
-  threadStyle = {
+  theadStyle = {
 
   }
 
-  tableStyle = {
+  tbodyStyle = {
     height: '10rem',
     overflowY: 'scroll',
     width: '100%'
@@ -45,13 +46,21 @@ class Homicide extends React.Component {
           dict[homicide[property]] = 1
         }
       })
+    } else if (property === 'weapon') {
+      homicides.forEach(homicide => {
+        if (dict[homicide[property]]) {
+          dict[homicide[property]] += 1
+        } else {
+          dict[homicide[property]] = 1
+        }
+      })
     } else if (property === 'crimedate') {
       let month
       for (let i = 0; i < 12; i++) {
         dict[i] = 0
       }
       homicides.forEach(homicide => {
-        month = moment(homicide.crimedata).month()
+        month = moment(homicide.crimedate).month()
         dict[month] += 1
       })
     }
@@ -80,6 +89,24 @@ class Homicide extends React.Component {
       series: [
         {
           name: 'districts',
+          data: data
+        }
+      ]
+    }
+  }
+
+  getWeaponOptions = () => {
+    const data = this.createData('weapon')
+    return {
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: 'Homicides weapon'
+      },
+      series: [
+        {
+          name: 'weapon',
           data: data
         }
       ]
@@ -121,6 +148,7 @@ class Homicide extends React.Component {
   render () {
     const districtOptions = this.getDistrictOptions()
     const monthlyOptions = this.getMonthlyOptions()
+    const weaponOptions = this.getWeaponOptions()
     return (
       <div>
         <Row>
@@ -143,8 +171,16 @@ class Homicide extends React.Component {
         </Row>
         <Row>
           <Col>
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={weaponOptions}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <h2>Details of Each Homicide</h2>
-            <table style={this.tableStyle}>
+            <Table responsive striped bordered ="lg">
               <thead style={this.theadStyle}>
                 <tr>
                   <th>
@@ -154,10 +190,13 @@ class Homicide extends React.Component {
                     code
                   </th>
                   <th>
-                    Description
+                      Description
                   </th>
                   <th>
-                    location
+                    Weapon
+                  </th>
+                  <th>
+                    Location
                   </th>
                   <th>
                     District
@@ -184,6 +223,9 @@ class Homicide extends React.Component {
                           {homicide.description}
                         </td>
                         <td>
+                          {homicide.weapon}
+                        </td>
+                        <td>
                           {homicide.location}
                         </td>
                         <td>
@@ -194,7 +236,7 @@ class Homicide extends React.Component {
                   })
                 }
               </tbody>
-            </table>
+            </Table>
           </Col>
         </Row>
       </div>

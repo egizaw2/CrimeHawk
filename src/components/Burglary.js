@@ -5,7 +5,9 @@ import PropTypes from 'prop-types'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import moment from 'moment'
+import Table from 'react-bootstrap/Table'
 
+// Completed on 7/3/2020 by Andrew Landis
 class Burglary extends React.Component {
   static propTypes = {
     crimeData: PropTypes.array,
@@ -82,7 +84,7 @@ class Burglary extends React.Component {
       },
       series: [
         {
-          name: 'districts',
+          name: 'Burglaries',
           data: data
         }
       ]
@@ -146,7 +148,7 @@ class Burglary extends React.Component {
         <Row>
           <Col>
             <h2>Details of Each Burglary</h2>
-            <table style={this.tableStyle}>
+            <Table responsive striped ="lg">
               <thead style={this.theadStyle}>
                 <tr>
                   <th>
@@ -196,7 +198,7 @@ class Burglary extends React.Component {
                   })
                 }
               </tbody>
-            </table>
+            </Table>
           </Col>
         </Row>
       </div>

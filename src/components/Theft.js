@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import moment from 'moment'
+import Table from 'react-bootstrap/Table'
 
 class Theft extends React.Component {
   static propTypes = {
@@ -82,7 +83,7 @@ class Theft extends React.Component {
       },
       series: [
         {
-          name: 'districts',
+          name: 'Thefts',
           data: data
         }
       ]
@@ -146,7 +147,7 @@ class Theft extends React.Component {
         <Row>
           <Col>
             <h2>Details of Each Larceny</h2>
-            <table style={this.tableStyle}>
+            <Table responsive striped bordered="lg">
               <thead style={this.theadStyle}>
                 <tr>
                   <th>
@@ -196,7 +197,7 @@ class Theft extends React.Component {
                   })
                 }
               </tbody>
-            </table>
+            </Table>
           </Col>
         </Row>
       </div>
