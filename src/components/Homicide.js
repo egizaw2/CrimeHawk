@@ -46,6 +46,14 @@ class Homicide extends React.Component {
           dict[homicide[property]] = 1
         }
       })
+    } else if (property === 'weapon') {
+      homicides.forEach(homicide => {
+        if (dict[homicide[property]]) {
+          dict[homicide[property]] += 1
+        } else {
+          dict[homicide[property]] = 1
+        }
+      })
     } else if (property === 'crimedate') {
       let month
       for (let i = 0; i < 12; i++) {
@@ -87,6 +95,24 @@ class Homicide extends React.Component {
     }
   }
 
+  getWeaponOptions = () => {
+    const data = this.createData('weapon')
+    return {
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: 'Homicides weapon'
+      },
+      series: [
+        {
+          name: 'weapon',
+          data: data
+        }
+      ]
+    }
+  }
+
   getMonthlyOptions = () => {
     const data = this.createData('crimedate')
     return {
@@ -122,6 +148,7 @@ class Homicide extends React.Component {
   render () {
     const districtOptions = this.getDistrictOptions()
     const monthlyOptions = this.getMonthlyOptions()
+    const weaponOptions = this.getWeaponOptions()
     return (
       <div>
         <Row>
@@ -144,6 +171,14 @@ class Homicide extends React.Component {
         </Row>
         <Row>
           <Col>
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={weaponOptions}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <h2>Details of Each Homicide</h2>
             <Table responsive striped bordered ="lg">
               <thead style={this.theadStyle}>
@@ -155,7 +190,10 @@ class Homicide extends React.Component {
                     code
                   </th>
                   <th>
-                    Description
+                      Description
+                  </th>
+                  <th>
+                    Weapon
                   </th>
                   <th>
                     Location
@@ -183,6 +221,9 @@ class Homicide extends React.Component {
                         </td>
                         <td>
                           {homicide.description}
+                        </td>
+                        <td>
+                          {homicide.weapon}
                         </td>
                         <td>
                           {homicide.location}
