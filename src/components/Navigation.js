@@ -7,11 +7,8 @@ class Navigation extends React.Component {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
         <Navbar.Brand href="/">CrimeHawk</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#">Resources</Nav.Link>
-            <Nav.Link href="#">About</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
