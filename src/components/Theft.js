@@ -32,7 +32,7 @@ class Theft extends React.Component {
   getLarcenies = () => {
     return this.props.crimeData.filter(crime => {
       const crimeYear = moment(crime.crimedate).year().toString()
-      return crime.description === 'LARCENY' && crimeYear === this.props.year
+      return crime.description.includes('LARCENY') && crimeYear === this.props.year
     })
   }
 
@@ -40,7 +40,7 @@ class Theft extends React.Component {
     // Create dictionary of larceny types
     const larcenies = this.getLarcenies()
     const dict = {}
-    if (property === 'district') {
+    if (property === 'district' || property === 'description') {
       larcenies.forEach(larceny => {
         if (dict[larceny[property]]) {
           dict[larceny[property]] += 1
@@ -121,9 +121,49 @@ class Theft extends React.Component {
     }
   }
 
+  getLarcenyTypeOptions = () => {
+    const data = this.createData('description')
+    console.log(data.map(larceny => ({
+      name: larceny.name,
+      data: [larceny.y]
+    })))
+    return {
+      chart: {
+        type: 'bar'
+      },
+      title: {
+        text: `Types of Larcenies in ${this.props.year}`
+      },
+      xAxis: {
+        categories: data.map(larceny => larceny.name),
+        title: {
+          text: null
+        }
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Number of Larcenies'
+        }
+      },
+      plotOptions: {
+        bar: {
+          dataLabels: {
+            enabled: true
+          }
+        }
+      },
+      series: [{
+        name: 'Larcenies',
+        data: data.map(month => month.y)
+      }]
+    }
+  }
+
   render () {
     const districtOptions = this.getDistrictOptions()
     const monthlyOptions = this.getMonthlyOptions()
+    const typeOptions = this.getLarcenyTypeOptions()
     return (
       <div>
         <Row>
@@ -141,6 +181,14 @@ class Theft extends React.Component {
             <HighchartsReact
               highcharts={Highcharts}
               options={monthlyOptions}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <HighchartsReact
+              highcharts={Highcharts}
+              options={typeOptions}
             />
           </Col>
         </Row>

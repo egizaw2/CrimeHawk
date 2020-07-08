@@ -5,7 +5,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 import Burglary from './Burglary'
 import Homicide from './Homicide'
 import Theft from './Theft'
@@ -69,7 +69,7 @@ class Root extends React.Component {
             <Col>
               <Form>
                 <Form.Row>
-                  <Col xs={12} sm={12} md={5}>
+                  <Col xs={12} sm={12} md={6}>
                     <Form.Group>
                       <Form.Control
                         as="select"
@@ -82,7 +82,7 @@ class Root extends React.Component {
                       </Form.Control>
                     </Form.Group>
                   </Col>
-                  <Col xs={12} sm={12} md={5}>
+                  <Col xs={12} sm={12} md={6}>
                     <Form.Group>
                       <Form.Control
                         as="select"
@@ -97,11 +97,6 @@ class Root extends React.Component {
                         <option>2019</option>
                         <option>2020</option>
                       </Form.Control>
-                    </Form.Group>
-                  </Col>
-                  <Col xs={12} sm={12} md={2}>
-                    <Form.Group>
-                      <Button variant="primary" type="submit" className="mx-auto d-block">Submit</Button>
                     </Form.Group>
                   </Col>
                 </Form.Row>
