@@ -29,6 +29,7 @@ class Theft extends React.Component {
     width: '100%'
   }
 
+  // Updated by Andrew Landis on 7/3/2020
   getLarcenies = () => {
     return this.props.crimeData.filter(crime => {
       const crimeYear = moment(crime.crimedate).year().toString()
@@ -36,6 +37,7 @@ class Theft extends React.Component {
     })
   }
 
+  // Updated by Andrew Landis on 7/3/2020
   createData = (property) => {
     // Create dictionary of larceny types
     const larcenies = this.getLarcenies()
@@ -72,6 +74,7 @@ class Theft extends React.Component {
     return data
   }
 
+  // Created by Eske Gizaw on 6/28/2020
   getDistrictOptions = () => {
     const data = this.createData('district')
     return {
@@ -90,6 +93,7 @@ class Theft extends React.Component {
     }
   }
 
+  // Created by Eske Gizaw on 6/28/2020
   getMonthlyOptions = () => {
     const data = this.createData('crimedate')
     return {
@@ -121,6 +125,7 @@ class Theft extends React.Component {
     }
   }
 
+  // Created by Andrew Landis on 7/3/2020
   getLarcenyTypeOptions = () => {
     const data = this.createData('description')
     console.log(data.map(larceny => ({
@@ -160,6 +165,7 @@ class Theft extends React.Component {
     }
   }
 
+  // Updated by Andrew Landis on 7/3/2020
   render () {
     const districtOptions = this.getDistrictOptions()
     const monthlyOptions = this.getMonthlyOptions()
