@@ -21,13 +21,13 @@ class Root extends React.Component {
     crimeData: PropTypes.array.isRequired
   }
 
-  // Completed 6/28/2020 by Andrew Landis
+  
   state = {
     crimeType: '', // Can be Burglary, Homicide, or Theft
     year: '' // Can be 2014-2020
   }
 
-  // Completed 6/28/2020 by Andrew Landis
+  
   handleCrimeChange = (e) => {
     const type = e.target.value
     this.setState(() => (
@@ -37,7 +37,7 @@ class Root extends React.Component {
     ))
   }
 
-  // Completed 6/28/2020 by Andrew Landis
+  
   handleYearChange = (e) => {
     const year = e.target.value
     this.setState(() => (
@@ -47,7 +47,7 @@ class Root extends React.Component {
     ))
   }
 
-  // Completed 6/28/2020 by Andrew Landis and Eske Gizaw
+  
   render () {
     return (
       <div>
