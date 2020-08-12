@@ -1,6 +1,5 @@
 const path = require('path')
 
-// Completed on 6/28/2020 by Andrew Landis
 module.exports = {
   entry: './src/index.js',
   mode: 'development',
